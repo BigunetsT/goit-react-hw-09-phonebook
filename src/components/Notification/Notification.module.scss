@@ -1,0 +1,10 @@
+@import '../../styles/shared.scss';
+
+.notification {
+  width: 300px;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  background-color: var(--background-color);
+}

@@ -1,0 +1,79 @@
+@import '../../styles/shared.scss';
+
+.phoneNumber {
+  margin-left: 10px;
+}
+.contactItem {
+  margin-left: 30px;
+  margin-bottom: 10px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  width: 450px;
+  // min-width: 320px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 5px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+.img {
+  margin-right: 10px;
+}
+.name {
+  font-weight: bold;
+}
+.contactBtn {
+  position: relative;
+  padding: 2px 5px;
+  background-color: var(--second-color);
+  border: 1px solid var(--main-border-color);
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    color: var(--active-color);
+    & > svg {
+      fill: var(--active-color);
+    }
+  }
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+.contactBtn::after {
+  content: '';
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border: 3px solid var(--active-color);
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: none;
+  display: none;
+}
+.contactBtn:hover::after {
+  display: block;
+  animation: ring 1.5s infinite;
+}
+@keyframes ring {
+  0% {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+  }
+  100% {
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+  }
+}
+.svg {
+  margin-left: 10px;
+  &:hover {
+    fill: var(--active-color);
+  }
+}

@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { authSelectors, authOperations } from '../../redux/auth';
 import styles from './UserMenu.module.scss';
 
-const UserMenu = ({ email, onLogout }) => {
+export default function UserMenu() {
+  const email = useSelector(authSelectors.getUserEmail);
+  const dispatch = useDispatch();
+  const onLogout = useCallback(() => {
+    dispatch(authOperations.logOut());
+  }, [dispatch]);
   return (
     <div>
       <span className={styles.email}>{email}</span>
@@ -26,16 +31,9 @@ const UserMenu = ({ email, onLogout }) => {
       </button>
     </div>
   );
-};
-const mapStateToProps = state => ({
-  email: authSelectors.getUserEmail(state),
-});
+}
 
 UserMenu.propTypes = {
   email: PropTypes.string,
   onLogout: PropTypes.func,
 };
-const mapDispatchToProps = {
-  onLogout: authOperations.logOut,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);

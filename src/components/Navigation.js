@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { authSelectors } from '../redux/auth';
 import PropTypes from 'prop-types';
 import routes from '../routes';
 import '../styles.scss';
 
-const Navigation = ({ isAuthenticated }) => {
+export default function Navigation() {
+  const isLoggedIn = useSelector(authSelectors.getIsAuthenticated);
   return (
     <nav className="nav">
       <Link to={routes.home}>
@@ -78,7 +79,7 @@ const Navigation = ({ isAuthenticated }) => {
       >
         Головна
       </NavLink>
-      {isAuthenticated && (
+      {isLoggedIn && (
         <NavLink
           className="header__link"
           activeClassName="header__link-active"
@@ -89,11 +90,8 @@ const Navigation = ({ isAuthenticated }) => {
       )}
     </nav>
   );
-};
-const mapStateToProps = state => ({
-  isAuthenticated: authSelectors.getIsAuthenticated(state),
-});
+}
+
 Navigation.propTypes = {
-  isAuthenticated: PropTypes.bool,
+  isLoggedIn: PropTypes.bool,
 };
-export default connect(mapStateToProps)(Navigation);

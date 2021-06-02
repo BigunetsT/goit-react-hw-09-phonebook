@@ -48,7 +48,7 @@ const deleteContact = contactId => async dispatch => {
 };
 
 const updateContact =
-  ({ id, name, number }) =>
+  ({ id, newName: name, newNumber: number }) =>
   async dispatch => {
     const update = { name, number };
     dispatch(updateContactRequest());

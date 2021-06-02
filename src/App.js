@@ -59,11 +59,9 @@ export default function App() {
             <RegisterPage />
           </PublicRoute>
 
-          <PrivateRoute
-            path={routes.contacts}
-            redirectTo={routes.login}
-            component={ContactsPage}
-          />
+          <PrivateRoute path={routes.contacts} redirectTo={routes.login}>
+            <ContactsPage />
+          </PrivateRoute>
 
           <Redirect to={routes.home} />
         </Switch>

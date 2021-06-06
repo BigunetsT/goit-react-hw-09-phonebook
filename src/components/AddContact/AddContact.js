@@ -9,10 +9,13 @@ import { contactsSelectors } from '../../redux/contacts';
 import notification from '../Notification/transitions/notification.module.css';
 
 export default function AddContact() {
+  const dispatch = useDispatch();
+  const contacts = useSelector(contactsSelectors.getContacts);
   const [state, setState] = useState({
     name: '',
     number: '',
   });
+  const { name, number } = state;
   const [message, setMessage] = useState(null);
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -21,9 +24,6 @@ export default function AddContact() {
       [name]: value,
     }));
   };
-  const { name, number } = state;
-  const contacts = useSelector(contactsSelectors.getContacts);
-  const dispatch = useDispatch();
   const handleSubmit = e => {
     e.preventDefault();
     if (

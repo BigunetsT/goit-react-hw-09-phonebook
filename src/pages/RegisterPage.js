@@ -15,6 +15,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default function RegisterPage() {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -36,7 +37,7 @@ export default function RegisterPage() {
       [name]: event.target.value,
     });
   };
-  const dispatch = useDispatch();
+
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(authOperations.register(formData));

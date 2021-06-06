@@ -15,6 +15,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import '../styles.scss';
 
 export default function LoginPage() {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -32,7 +33,6 @@ export default function LoginPage() {
       [name]: event.target.value,
     });
   };
-  const dispatch = useDispatch();
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(authOperations.logIn(formData));

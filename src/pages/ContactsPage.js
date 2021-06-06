@@ -13,12 +13,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles.scss';
 
 export default function ContactsPage() {
+  const dispatch = useDispatch();
   const countVisibleContacts = 26;
+
   const [showModal, setShowModal] = useState(false);
   const [firstIndex, setFirstIndex] = useState(0);
   const [secondIndex, setSecondIndex] = useState(
     Number(`${countVisibleContacts}`),
   );
+
+  const contactsCount = useSelector(contactsSelectors.getContactsCount);
+  const contacts = useSelector(contactsSelectors.getSortContacts);
+  const filter = useSelector(contactsSelectors.getFilter);
+  const showPrevBtn = secondIndex > `${countVisibleContacts}`;
+  const showNextBtn = contactsCount - secondIndex > 0;
+
   const openModal = () => {
     setShowModal(true);
   };
@@ -43,15 +52,10 @@ export default function ContactsPage() {
       behavior: 'smooth',
     });
   };
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(contactsOperations.fetchContacts());
-  }, []);
-  const contactsCount = useSelector(contactsSelectors.getContactsCount);
-  const contacts = useSelector(contactsSelectors.getSortContacts);
-  const filter = useSelector(contactsSelectors.getFilter);
-  const showPrevBtn = secondIndex > `${countVisibleContacts}`;
-  const showNextBtn = contactsCount - secondIndex > 0;
+  }, [dispatch]);
+
   return (
     <div className="container__page container__page-contacts">
       <h1 className="title">Контакти</h1>

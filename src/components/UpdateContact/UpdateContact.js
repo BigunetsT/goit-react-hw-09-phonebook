@@ -9,6 +9,8 @@ import { contactsSelectors } from '../../redux/contacts';
 import notification from '../Notification/transitions/notification.module.css';
 
 export default function UpdateContact({ name, number, id }) {
+  const contacts = useSelector(contactsSelectors.getContacts);
+  const dispatch = useDispatch();
   const [newName, setNewName] = useState(name);
   const [newNumber, setNewNumber] = useState(number);
   const [message, setMessage] = useState(null);
@@ -25,9 +27,6 @@ export default function UpdateContact({ name, number, id }) {
         console.log('Error');
     }
   };
-  const contacts = useSelector(contactsSelectors.getContacts);
-  const dispatch = useDispatch();
-
   const handleSubmit = e => {
     e.preventDefault();
     if (
